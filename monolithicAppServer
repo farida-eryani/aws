@@ -1,0 +1,39 @@
+Last login: Sun Apr 14 06:33:37 2024 from 18.206.107.28
+ubuntu@ip-10-16-10-32:~$ history
+    1  sudo lsof -i :80
+    2  ip a
+    3  ps -ef | head -1; ps -ef | grep node
+    4  cd ~/resources/codebase_partner
+    5  ls
+    6  mysql
+    7  mysql -u root -p
+    8  mysql -u admin -p
+    9  cd
+   10  mysql -u admin -p
+   11  sudo su -
+   12  ll
+   13  cd ~/resources/codebase_partner
+   14  ls
+   15  ss -tlnp
+   16  ll
+   17  cd app/config/
+   18  ll
+   19  cd
+   20  nc -zv $dbEnpoint 3306
+   21  nc
+   22  sudo apt install ncml
+   23  sudo apt install nc
+   24  sudo apt update && sudo apt install netcat-traditional
+   25  nc
+   26  nc -zv $dbEnpoint 3306
+   27  echo $dbEndpoint
+   28  nc -zv $dbEndpoint 3306
+   29  dbEnpoint=$(sudo cat ~/resources/codebase_partner/app/config/config.js | grep 'APP_DB_HOST')
+   30  echo $dbEnpoint 
+   31  dbEnpoint=$(sudo cat ~/resources/codebase_partner/app/config/config.js | grep 'APP_DB_HOST' | cut -d '"' -f2)
+   32  echo $dbEnpoint 
+   33  nc
+   34  nc -zv $dbEnpoint  3306
+   35  mysql -u nodeapp -pcoffee -h $dbEnpoint 
+   36  history
+ubuntu@ip-10-16-10-32:~$ 
