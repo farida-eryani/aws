@@ -43,3 +43,216 @@ voclabs:~/environment $ history
    42  echo $appServerPrivIp
    43  scp -r -i ~/.ssh/labsuser.pem ubuntu@$appServerPrivIp:/home/ubuntu/resources/codebase_partner/* ~/environment/temp/
    44  history
+   45  sudo yum install -y nmap-ncat
+   46  ll
+   47  mkdir -p microservices/customer
+   48  mkdir -p microservices/employee
+   49  sudo yum install tree
+   50  tree
+   51  cd microservices/
+   52  tree
+   53  cd ..
+   54  cp -R temp/* microservices/customer/
+   55  ls microservices/customer/
+   56  mv temp/* microservices/employee/
+   57  ll microservices/employee/
+   58  rm -rf temp/
+   59  history
+   60  aws codecommit create-repository --repository-name microservices
+   61  cd microservices/
+   62  git init
+   63  git branch -m dev
+   64  git add .
+   65  git config -l
+   66  git config --global user.name 'fe'
+   67  git config --global user.email 'febdx33000@gmail.com'
+   68  git config -l
+   69  git status
+   70  git log
+   71  git commit -m "2copies du code de l'application" 
+   72  git log
+   73  git config -l
+   74  git remote add origin https://git-codecommit.us-east-1.amazonaws.com/v1/repos/microservices
+   75  git push -u origin dev
+   76  cd customer/views/
+   77  ll
+   78  rm supplier-add.html 
+   79  rm supplier-form-fields.html 
+   80  rm supplier-update.html 
+   81  ll
+   82  cd ..
+   83  touch Dockerfile
+   84  docker build --tag customer .
+   85  docker image ls
+   86  docker image inspect customer
+   87  docker container run -d -p 8080:8080 customer
+   88  docker container ls
+   89  ss -tlnp
+   90  curl http://localhost:8080
+   91  docker image ls
+   92  docker container ls
+   93  docker container stop friendly_golick
+   94  docker container rm friendly_golick
+   95  docker image ls
+   96  docker image rm  1b4f878e09b8  f18da2f58c3d
+   97  docker image ls
+   98  history
+   99  docker build --tag customer .
+  100  docker image ls
+  101  docker image inspect customer
+  102  docker container run -d -p 8080:8080 customer
+  103  docker container ls
+  104  ss -tlnp
+  105  curl http://localhost:8080
+  106  history
+  107  docker container ls
+  108  docker container stop zen_robinson
+  109  docker container rm zen_robinson
+  110  docker image ls
+  111  docker image rm  c2a529d6829e f18da2f58c3d 
+  112  docker image rm -f  c2a529d6829e f18da2f58c3d 
+  113  docker image ls
+  114  history
+  115  docker build --tag customer .
+  116  docker image ls
+  117  docker image inspect customer
+  118  docker container run -d -p 8080:8080 customer
+  119  docker container ls
+  120  ss -tlnp
+  121  curl http://localhost:8080
+  122  ss -tlnp | grep 8080
+  123  sudo ss -tlnp | grep 8080
+  124  history
+  125  docker container ls
+  126  docker container rm -f determined_maxwell
+  127  docker container ls
+  128  dbEndpoint=$(cat ~/environment/microservices/customer/app/config/config.js | grep 'APP_DB_HOST' | cut -d '"' -f2)
+  129  echo $dbEndpoint
+  130  docker container ls
+  131  docker run -d --name customer_1 -p 8080:8080 -e APP_DB_HOST="$dbEndpoint" customer
+  132  docker container ls
+  133  ss -tlnp
+  134  docker container log customer_1
+  135  docker container logs customer_1
+  136  git status
+  137  git add .
+  138  git commit -m "add microservices customer check in"
+  139  git status
+  140  git log
+  141  git push
+  142  cd ../employee/
+  143  grep -n 'redirect' app/controller/supplier.controller.js
+  144  grep -n 'suppliers' app/controller/supplier.controller.js
+  145  grep -n 'redirect' app/controller/supplier.controller.js
+  146  grep -n 'suppliers' app/controller/supplier.controller.js
+  147  grep -n 'action' views/*
+  148  grep -n 'href' views/supplier-list-all.html views/home.html
+  149  cp ../customer/Dockerfile 
+  150  cp ../customer/Dockerfile .
+  151  history 
+  152  docker container run -d -p 8081:8081 employee
+  153  docker buil --tag employee .
+  154  docker container run -d -p 8081:8081 employee
+  155  docekr build --tag employee .
+  156  docker container run --name employee_1 -d -p 8081:8081 customer
+  157  docker container ls
+  158  docker image ls
+  159  docker container stop employee_1
+  160  docker container rm employee_1
+  161  docker build --tag employee .
+  162  docker container run -d -p 8080:8080 customer
+  163  docker container run --name employee_1 -d -p 8081:8081 employee
+  164  docker image ls
+  165  docker container ls
+  166  ss -tlnp | 808
+  167  ss -tlnp | grep 808
+  168  docker container stop employee_1
+  169  docker container rm -f employee_1
+  170  docker container run --name employee_1 -d -e APP_DB_HOST="supplierdb.cv6oxm9daqsr.us-east-1.rds.amazonaws.com" -p 8081:8081 employee
+  171  docker container ls
+  172  ss -tlnp
+  173  ll
+  174  docker rm -f employee_1 
+  175  docker container ls
+  176  history
+  177  history |grep buil
+  178  docekr build --tag employee .
+  179  docker build --tag employee .
+  180  docker image ls
+  181  docker image stop 3d2ed06d2235
+  182  docker image rm -f 3d2ed06d2235
+  183  docker image ls
+  184  docker container ls
+  185  docker build --tag employee .
+  186  docker container ls
+  187  docker container stop customer_1
+  188  docker container rm customer_1
+  189  docker container ls
+  190  cd
+  191  cd environment/microservices/
+  192  ls -a
+  193  git status
+  194  git commit -a -m "adds employee microservices check in"
+  195  git status
+  196  git add .
+  197  git commit -a -m "adds employee microservices check in"
+  198  git status
+  199  git push
+  200  docker container run --name test -p 8080:8080 employee
+  201  docker container ls
+  202  python3 -m http.server 8081
+  203  history | grep build
+  204  docker build --tag employee .
+  205  cd employee/
+  206  docker build --tag employee .
+  207  docker container run --name test -p 8080:8080 employee
+  208  docker container ls
+  209  sudo docker container ls
+  210  sudo docker container rm test
+  211  docker container run --name test -p 8080:8080 employee
+  212  history
+  213  docker container run --name test -d -e APP_DB_HOST="supplierdb.cv6oxm9daqsr.us-east-1.rds.amazonaws.com" -p 8081:8081 employee
+  214  sudo docker container rm test
+  215  docker container run --name test -d -e APP_DB_HOST="supplierdb.cv6oxm9daqsr.us-east-1.rds.amazonaws.com" -p 8081:8081 employee
+  216  curl hhtp://localhost:8080
+  217  curl http://localhost:8080
+  218  sudo docker container rm test
+  219  sudo docker container stop test
+  220  sudo docker container rm test
+  221  cd ..
+  222  docker container run --name test -p 8080:8080 employee
+  223  docker image ls
+  224  docker image rm -f  41f7ef21ee3e
+  225  docker image ls
+  226  cd employee/
+  227  docker build --tag employee .
+  228  git commit -a -m "adds employee microservices check in again"
+  229  git push
+  230  docker container run --name test -p 8080:8080 employee
+  231  docker container rm -f test
+  232  docker container run -d --name test -p 8080:8080 employee
+  233  ss -tlnp
+  234  curl http://localhost:8080
+  235  docker container ls
+  236  docker container stop test
+  237  docker container rm test
+  238  ss -tlnp
+  239  cd ..
+  240  account_id=$(aws sts get-caller-identity |grep Account|cut -d '"' -f4)
+  241  echo $account_id
+  242  aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $account_id.dkr.ecr.us-east-1.amazonaws.com
+  243  history
+  244  aws ecr create-repository --repository-name customer
+  245  aws ecr delete-repository --repository-name customer --force
+  246  aws ecr create-repository --repository-name customer
+  247  aws ecr delete-repository --repository-name employee --force
+  248  aws ecr create-repository --repository-name employee
+  249  aws ecr create-repository --repository-name customer | jq
+  250  aws ecr delete-repository --repository-name customer --force
+  251  aws ecr create-repository --repository-name customer | jq
+  252  aws ecr delete-repository --repository-name employee --force
+  253  aws ecr create-repository --repository-name employee | jq
+  254  aws ecr delete-repository --repository-name employee --force
+  255  aws ecr create-repository --repository-name employee | jq
+  256  history
+voclabs:~/environment $ 
