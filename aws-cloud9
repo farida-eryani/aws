@@ -1,0 +1,45 @@
+voclabs:~/environment $ history
+    1  ll
+    2  mv labsuser(1).pem labuser.pem 
+    3  ll
+    4  mv labuser.pem ~/.ssh/
+    5  ll
+    6  chmod 044 ~/.ssh/labuser.pem 
+    7  mkdir temp
+    8  aws ec2 describe-instances
+    9  aws ec2 describe-instances --filters "Name=tag:Name,Values="MonolithicAppServer'"
+   10  aws ec2 describe-instances --filters "Name=tag:Name,Values="MonolithicAppServer""
+   11  aws ec2 describe-instances --filters "Name=tag:Name,Values="MonolithicAppServer"" | jq
+   12  yum update && yum install jq
+   13  sudo yum update && sudo yum install jq
+   14  aws ec2 describe-instances --filters "Name=tag:Name,Values="MonolithicAppServer"" | jq
+   15  aws ec2 describe-instances --filters "Name=tag:Name,Values="MonolithicAppServer"" --query 'Reservation[].Instances[].[PrivateIpAddress]'
+   16  aws ec2 describe-instances --filters "Name=tag:Name,Values="MonolithicAppServer"" --query 'Reservations[].Instances[].[PrivateIpAddress]'
+   17  aws ec2 describe-instances --filters "Name=tag:Name,Values="MonolithicAppServer"" --query 'Reservations[].Instances[].[PrivateIpAddress]' --output text
+   18  appServerPrivIP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values="MonolithicAppServer"" --query 'Reservations[].Instances[].[PrivateIpAddress]' --output text)
+   19  echo $appServerPrivIP 
+   20  scp -r -i ~/.ssh/labsuser.pem ubuntu@$appServerPrivIp:/home/ubuntu/resources/codebase_partner/* ~/environment/temp/
+   21  cd ~/.ssh/
+   22  ll
+   23  mv labuser.pem labsuser.pem 
+   24  cd
+   25  chmo 044 ~/.ssh/labsuser.pem 
+   26  chmod 044 ~/.ssh/labsuser.pem 
+   27  cd environment/
+   28  scp -r -i ~/.ssh/labsuser.pem ubuntu@$appServerPrivIp:/home/ubuntu/resources/codebase_partner/* ~/environment/temp/
+   29  cd ~/.ssh/
+   30  ll
+   31  cat labsuser.pem 
+   32  chmod 0400 labsuser.pem 
+   33  cd 
+   34  chmod ~/.ssh/labsuser.pem 
+   35  cd environment/
+   36  scp -r -i ~/.ssh/labsuser.pem ubuntu@$appServerPrivIp:/home/ubuntu/resources/codebase_partner/* ~/environment/temp/
+   37  echo $appServerPrivIp
+   38  aws ec2 describe-instances --filters "Name=tag:Name,Values="MonolithicAppServer"" --query 'Reservations[].Instances[].[PrivateIpAddress]' --output text
+   39  appServerPrivIP=$(aws ec2 describe-instances --filters "Name=tag:Name,Values="MonolithicAppServer"" --query 'Reservations[].Instances[].[PrivateIpAddress]' --output text)
+   40  echo $appServerPrivIp
+   41  appServerPrivIp=$(aws ec2 describe-instances --filters "Name=tag:Name,Values="MonolithicAppServer"" --query 'Reservations[].Instances[].[PrivateIpAddress]' --output text)
+   42  echo $appServerPrivIp
+   43  scp -r -i ~/.ssh/labsuser.pem ubuntu@$appServerPrivIp:/home/ubuntu/resources/codebase_partner/* ~/environment/temp/
+   44  history
