@@ -1,0 +1,160 @@
+   1  ls
+    2  mkdir temp
+    3  chmod 0400 labsuser.pem 
+    4  scp -r labsuser.pem ubuntu@10.16.10.241:/home/ubuntu/resources/codebase_partner/* ~/environment/temp/
+    5  scp -r -i labsuser.pem ubuntu@10.16.10.241:/home/ubuntu/resources/codebase_partner/* ~/environment/temp/
+    6  mkdir microservices
+    7  cd microservices/
+    8  mkdir customer employee
+    9  ll
+   10  cp temp/* 
+   11  cd ..
+   12  cp -R temp/* microservices/customer/
+   13  mv temp/* microservices/employee/
+   14  rm temp/
+   15  rm -rf temp/
+   16  aws codecommit create-repository --repository-name microservices
+   17  git config user.name fe
+   18  git config --global user.name fe
+   19  git config --global user.email febdx33000@gmail.com
+   20  cd microservices/
+   21  git init
+   22  git branch -m dev
+   23  git add .
+   24  git commit -m "add customer & employee"
+   25  git remote add origin https://git-codecommit.us-east-1.amazonaws.com/v1/repos/microservices
+   26  git push -u origin dev
+   27  cd microservices/customer/views/
+   28  ll
+   29  rm supplier-add.html 
+   30  rm supplier-form-fields.html 
+   31  rm supplier-update.html 
+   32  ll
+   33  cd ..
+   34  touch Dockerfile
+   35  docker build --tag customer .
+   36  docker image ls
+   37  dbEndpoint=$(cat ~/environment/microservices/customer/app/config/config.js | grep 'APP_DB_HOST' | cut -d '"' -f2)
+   38  echo $dbEndpoint
+   39  docker run -d --name customer_1 -p 8080:8080 -e APP_DB_HOST="$dbEndpoint" customer
+   40  docker container lis
+   41  docker container ls
+   42  curl http://localhost:8080
+   43  git add .
+   44  git commit -m "inital customer microservices check in"
+   45  git push -u origin dev
+   46  cd ..
+   47  cd employee/
+   48  ll
+   49  cp ../customer/Dockerfile 
+   50  cp ..customer/Dockerfile 
+   51  cd ..
+   52  cd customer/
+   53  cp Dockerfile /employee
+   54  cp Dockerfile employee
+   55  docker container stop customer_1
+   56  ll
+   57  cp Dockerfile employee
+   58  cd ..
+   59  cd employee/
+   60  ll
+   61  cd ..
+   62  cd employee/
+   63  touch Dockerfile
+   64  history
+   65  docker run -d --name employee_1 -p 8080:8080 -e APP_DB_HOST="supplierdb.cv6oxm9daqsr.us-east-1.rds.amazonaws.com" employee
+   66   docker build --tag employee .
+   67  docker image ls
+   68  docker run -d --name employee_1 -p 8080:8080 -e APP_DB_HOST="supplierdb.cv6oxm9daqsr.us-east-1.rds.amazonaws.com" employee
+   69  docker container ls
+   70  git add .
+   71  git commit -m "upload employee check in"
+   72  git push -u origin dev
+voclabs:~/environment $ history
+    1  ls
+    2  mkdir temp
+    3  chmod 0400 labsuser.pem 
+    4  scp -r labsuser.pem ubuntu@10.16.10.241:/home/ubuntu/resources/codebase_partner/* ~/environment/temp/
+    5  scp -r -i labsuser.pem ubuntu@10.16.10.241:/home/ubuntu/resources/codebase_partner/* ~/environment/temp/
+    6  mkdir microservices
+    7  cd microservices/
+    8  mkdir customer employee
+    9  ll
+   10  cp temp/* 
+   11  cd ..
+   12  cp -R temp/* microservices/customer/
+   13  mv temp/* microservices/employee/
+   14  rm temp/
+   15  rm -rf temp/
+   16  aws codecommit create-repository --repository-name microservices
+   17  git config user.name fe
+   18  git config --global user.name fe
+   19  git config --global user.email febdx33000@gmail.com
+   20  cd microservices/
+   21  git init
+   22  git branch -m dev
+   23  git add .
+   24  git commit -m "add customer & employee"
+   25  git remote add origin https://git-codecommit.us-east-1.amazonaws.com/v1/repos/microservices
+   26  git push -u origin dev
+   27  cd microservices/customer/views/
+   28  ll
+   29  rm supplier-add.html 
+   30  rm supplier-form-fields.html 
+   31  rm supplier-update.html 
+   32  ll
+   33  cd ..
+   34  touch Dockerfile
+   35  docker build --tag customer .
+   36  docker image ls
+   37  dbEndpoint=$(cat ~/environment/microservices/customer/app/config/config.js | grep 'APP_DB_HOST' | cut -d '"' -f2)
+   38  echo $dbEndpoint
+   39  docker run -d --name customer_1 -p 8080:8080 -e APP_DB_HOST="$dbEndpoint" customer
+   40  docker container lis
+   41  docker container ls
+   42  curl http://localhost:8080
+   43  git add .
+   44  git commit -m "inital customer microservices check in"
+   45  git push -u origin dev
+   46  cd ..
+   47  cd employee/
+   48  ll
+   49  cp ../customer/Dockerfile 
+   50  cp ..customer/Dockerfile 
+   51  cd ..
+   52  cd customer/
+   53  cp Dockerfile /employee
+   54  cp Dockerfile employee
+   55  docker container stop customer_1
+   56  ll
+   57  cp Dockerfile employee
+   58  cd ..
+   59  cd employee/
+   60  ll
+   61  cd ..
+   62  cd employee/
+   63  touch Dockerfile
+   64  history
+   65  docker run -d --name employee_1 -p 8080:8080 -e APP_DB_HOST="supplierdb.cv6oxm9daqsr.us-east-1.rds.amazonaws.com" employee
+   66   docker build --tag employee .
+   67  docker image ls
+   68  docker run -d --name employee_1 -p 8080:8080 -e APP_DB_HOST="supplierdb.cv6oxm9daqsr.us-east-1.rds.amazonaws.com" employee
+   69  docker container ls
+   70  git add .
+   71  git commit -m "upload employee check in"
+   72  git push -u origin dev
+   73  docker container ls
+   74  docker container stop employee_1
+   75  docker container ls
+   76  history
+   77   docker build --tag employee .
+   78  docker run -d --name employee_1 -p 8080:8080 -e APP_DB_HOST="supplierdb.cv6oxm9daqsr.us-east-1.rds.amazonaws.com" employee
+   79  docker container ls -a
+   80  docker container rm employee_1
+   81  docker run -d --name employee_1 -p 8080:8080 -e APP_DB_HOST="supplierdb.cv6oxm9daqsr.us-east-1.rds.amazonaws.com" employee
+   82  docker container ls
+   83  history
+   84  git add .
+   85  git commit -m "upload employee check in"
+   86  git push -u origin dev
+   87  history
