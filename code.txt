@@ -158,3 +158,75 @@ voclabs:~/environment $ history
    85  git commit -m "upload employee check in"
    86  git push -u origin dev
    87  history
+   88  cd microservices/
+   89  ss -tlnp
+   90  account_id=$(aws sts get-caller-identity |grep Account|cut -d '"' -f4)
+   91  echo $account_id
+   92  aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $account_id.dkr.ecr.us-east-1.amazonaws.com
+   93  cat ~/.docker/config.json 
+   94  aws ecr help
+   95  aws ecr create-repository help
+   96  aws ecr create-repository --repository-name customer
+   97  aws ecr create-repository --repository-name employee | jq
+   98  yum install jq
+   99  sudo yum install jq
+  100  aws ecr create-repository --repository-name employee | jq
+  101  aws ecr delete-repository --repository-name employee --force
+  102  aws ecr create-repository --repository-name employee | jq
+  103  docker image ls
+  104  account_id=$(aws sts get-caller-identity |grep Account|cut -d '"' -f4)
+  105  echo $account_id
+  106  docker tag customer:latest $account_id.dkr.ecr.us-east-1.amazonaws.com/customer:latest
+  107  docker image ls
+  108  docker tag employee:latest $account_id.dkr.ecr.us-east-1.amazonaws.com/employee:latest
+  109  docker image ls
+  110  docker push 001096220582.dkr.ecr.us-east-1.amazonaws.com/customer
+  111  docker push 001096220582.dkr.ecr.us-east-1.amazonaws.com/employee
+  112  aws ecr list-images --repository-name customer
+  113  aws ecr list-images --repository-name employee
+  114  systemctl status docker
+  115  cd ..
+  116  mkdir deployment
+  117  cd deployment/
+  118  ll
+  119  ls -a
+  120  git init
+  121  git branch
+  122  git branch -m dev
+  123  git branch
+  124  git config -l
+  125  touch taskdef-customer.json
+  126  echo $account_id 
+  127  aws ecs register-task-definition --cli-input-json "file:///home/ec2-user/environment/deployment/taskdef-customer.json"
+  128  history
+  129  aws ecr create-repository --repository-name deployment
+  130  aws ecs list-task-definitions
+  131  aws ecs deregister-task-definition --task-definition <taskDefinitionArn>
+  132  aws ecs deregister-task-definition --task-definition arn:aws:ecs:us-east-1:001096220582:task-definition/customer-microservice:14
+  133  aws ecs stop-task --cluster microservices-serverlesscluster --task arn:aws:ecs:us-east-1:001096220582:task-definition/customer-microservice:14
+  134  aws ecs list-tasks --cluster microservices-serverlesscluster
+  135  git init
+  136  aws ecs register-task-definition --cli-input-json "file:///home/ec2-user/environment/deployment/taskdef-customer.json"
+  137  cp taskdef-customer.json taskdef-employee.json 
+  138  aws ecs register-task-definition --cli-input-json "file:///home/ec2-user/environment/deployment/taskdef-employee.json"
+  139  touch appspec-customer.yaml
+  140  cp appspec-customer.yaml appspec-employee.yaml 
+  141  git status
+  142  git add .
+  143  git commit -m "ajoute appspec et taskdef"
+  144  history |grep orig
+  145  git remote add origin https://git-codecommit.us-east-1.amazonaws.com/v1/repos/deployment
+  146  git config -l
+  147  git push -u origin dev
+  148  aws codecommit list-repositories --region us-east-1
+  149  aws codecommit create-repository --repository-name deployment --region us-east-1
+  150  git remote add origin https://git-codecommit.us-east-1.amazonaws.com/v1/repos/deployment
+  151  git config -l
+  152  git push -u origin dev
+  153  history
+  154  history |grep codecommit
+  155  git remote add origin https://git-codecommit.us-east-1.amazonaws.com/v1/repos/deployment
+  156  git log
+  157  git config -l
+  158  git remote set
+  159  history
